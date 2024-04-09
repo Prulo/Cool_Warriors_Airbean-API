@@ -15,3 +15,7 @@ const db = new Datastore({
 const server = app.listen(PORT, URL, () => {
   console.log(`Listening to port: ${PORT}`);
 });
+
+app.get("/", (req, res) => {
+  res.send("Hello there, my friend!");
+});
