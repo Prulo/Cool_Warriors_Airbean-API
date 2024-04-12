@@ -7,8 +7,14 @@ app.use(express.json());
 const PORT = 8000;
 const URL = "127.0.0.1";
 
-const db = new Datastore({
-  filename: "database.db",
+const db = {};
+
+const dbUsers = new Datastore({
+  filename: "./database/ordrar.db",
+  autoload: true,
+});
+const dbOrders = new Datastore({
+  filename: "./database/orders.db",
   autoload: true,
 });
 
