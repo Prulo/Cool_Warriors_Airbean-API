@@ -1,0 +1,2 @@
+Här antar jag att middleware kan ansvara för autensiering, när det talas om TOKEN
+require('jsonwebtoken') och enbart grundläggande logik för detta
