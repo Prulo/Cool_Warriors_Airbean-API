@@ -10,7 +10,7 @@ const URL = "127.0.0.1";
 const db = {};
 
 const dbUsers = new Datastore({
-  filename: "./database/ordrar.db",
+  filename: "./database/users.db",
   autoload: true,
 });
 const dbOrders = new Datastore({
