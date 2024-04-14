@@ -7,7 +7,7 @@ const getMenu = async () => {
     const menuData = await fs.readFile("menu.json", "utf8");
 
     const menu = JSON.parse(menuData);
-    console.log(menuData);
+
     return menu;
   } catch (err) {
     console.log(err);
@@ -15,10 +15,4 @@ const getMenu = async () => {
   }
 };
 
-getMenu();
-
 module.exports = { getMenu };
-
-
-module.exports = getMenu;
-
