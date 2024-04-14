@@ -14,3 +14,5 @@ router;
 module.exports = router; */
 
 /* Routes */
+
+// Skapa ny användare, skall lägga till handering för separat id-bibliotek, möjlighet att rodda "hashning" av lösenord
