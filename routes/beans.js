@@ -14,6 +14,11 @@ const getMenu = async () => {
     throw err;
   }
 };
+
 getMenu();
 
 module.exports = { getMenu };
+
+
+module.exports = getMenu;
+
