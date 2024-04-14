@@ -10,11 +10,5 @@ const getMenu = async () => {
     throw err;
   }
 };
-(async () => {
-  try {
-    const menu = await getMenu();
-    console.log("Meny inläst:", menu);
-  } catch (error) {
-    console.error("Det gick inte att hämta menyn:", error);
-  }
-})();
+
+module.exports = getMenu;
