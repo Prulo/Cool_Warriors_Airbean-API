@@ -12,7 +12,12 @@
 {"username":"Martin","password":"Hejsan123","email":"martin.hejsan@gmail.com","_id":"bDZw94w6rdvV7Rj5"}
 {"username":"Yngve Karlsson","password":"SossarnaRockar","email":"Mona.hejsan@gmail.com","_id":"bo9gTNDJzNecKngZ"}
 {"username":"bertil Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"eaYoK2AaBHg7dU2p"}
+{"username":"Berra Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"iHqrj7x68omAAxSV","products":[{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49}]}
+{"username":"Berra Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"iHqrj7x68omAAxSV","products":[{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49}]}
+{"username":"Berra Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"iHqrj7x68omAAxSV","products":[{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49}]}
+{"username":"Berra Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"iHqrj7x68omAAxSV","products":[{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Cortado","price":39}]}
 {"username":"Berra Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"iHqrj7x68omAAxSV"}
+
 {"username":"Piggan Werkelin","password":"PengarFOrLife","email":"pengar.hejsan@gmail.com","userId":"89249746-674d-4a9e-a124-edb6b1cf273b","_id":"j1Nc6v1PIeaz3ImK"}
 {"username":"Lattjolajban420","password":"11223344","email":"Leet@gmail.com","userId":"0b99ef9a-f03e-4a60-8339-30abdb93bf5f","_id":"kaDVroY4ACxToooO"}
 {"username":"Pigge Werkelin","password":"PengarFOrLife","email":"Gemigmerapengar.hejsan@gmail.com","userId":"b832d74d-9235-486f-8016-d6b4023dcea0","_id":"m5wydZuppkOJxGHh"}
@@ -21,3 +26,4 @@
 {"username":"Lindahl Kolberg","password":"112233","email":"korven.hejsan@gmail.com","userId":"7f0a8a8b-58c8-4bb7-bcd6-15ca37b9563b","_id":"qOxWqKnkYilx79GI"}
 {"username":"Kolberg","password":"112233","email":"hejsan1@gmail.com","userId":"9cf5e089-bcbc-4d38-b1e3-30a277e7ee7d","_id":"qWbx8bOsKpQn9t3Z"}
 {"username":"Prulo","password":"Dogass123","email":"Prulo.hejsan@gmail.com","userId":"ef84205b-2158-48df-b05b-746554f5d247","_id":"sRzgN6wedQYd1kpg"}
+
