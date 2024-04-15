@@ -88,11 +88,13 @@ app.post("/users/signup", async (req, res) => {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
+
     // id: bibliotek eller db-konsruerat?
   };
   try {
     dbUsers.insert(user);
     res.status(201).json({ message: "User created" });
+    // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
     res.status(400).send("Could not create a user");
   }
