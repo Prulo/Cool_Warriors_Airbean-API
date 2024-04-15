@@ -18,4 +18,3 @@ const getMenu = async () => {
 
 module.exports = { getMenu };
 
-
