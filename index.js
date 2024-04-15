@@ -1,5 +1,6 @@
 const express = require("express");
 const Datastore = require("nedb-promise");
+const { v4: uuidv4 } = require("uuid");
 
 const { getMenu } = require("./routes/beans");
 
@@ -26,19 +27,12 @@ const dbMenu = new Datastore({
   autoload: true,
 });
 
-/* app.use("/api/user", userRoutes); */
-
 const server = app.listen(PORT, URL, () => {
   console.log(`Listening to port: ${PORT}`);
 });
 
 app.get("/", (req, res) => {
   res.send("Hello there, my friend!");
-});
-
-// Ej färdig, för att posta menyn till databasen
-app.post("/beans", async (req, res) => {
-  const { price, desc, id, title } = req.body;
 });
 
 module.exports = { dbUsers, dbOrders };
@@ -107,12 +101,16 @@ app.post("/add", async (req, res) => {
   }
 });
 
+// Get requst for login returnera UUID?
+// Get request för orderhistorik (som gäst eller som användare (uuid))
+
+// När vi skapar, rodda id, uuid,
 app.post("/users/signup", async (req, res) => {
   const user = {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
-
+    // userId
     // id: bibliotek eller db-konsruerat?
   };
   try {
@@ -123,7 +121,7 @@ app.post("/users/signup", async (req, res) => {
     res.status(400).send("Could not create a user");
   }
 });
-// För att hitta användare med specifikt id
+// För att hitta användare med specifikt id, anvämnda för att returnera ordrar lagda med ID:t?
 app.get("/users/:id", async (req, res) => {
   const id = req.params.id;
   try {
