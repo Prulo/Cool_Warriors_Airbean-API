@@ -7,7 +7,7 @@ const getMenu = async () => {
     const menuData = await fs.readFile("menu.json", "utf8");
 
     const menu = JSON.parse(menuData);
-
+    console.log(menuData);
     return menu;
   } catch (err) {
     console.log(err);
@@ -15,24 +15,7 @@ const getMenu = async () => {
   }
 };
 
+
 module.exports = { getMenu };
 
-// Originalet innan tester
-/* const getMenu = async () => {
-  try {
-    const menuData = await fs.readFile("menu.json", "utf8");
 
-    const menu = JSON.parse(menuData);
-
-    return menu;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-}; 
-
-// Här ligger en gammal skiss på en post till databasen menu.db
-
-
-
-*/

@@ -49,11 +49,22 @@ app.get("/beans", async (req, res) => {
 
 app.post("/add", async (req, res) => {
   try {
-    const { title, price } = req.body;
+    const { title, price, userId } = req.body;
 
+    // Check if userId is provided
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    // Retrieve menu data
     const menuData = await getMenu();
+    if (!menuData || !menuData.menu) {
+      return res.status(500).json({ error: "Failed to retrieve menu data" });
+    }
+
     const menu = menuData.menu;
 
+    // Find the product in the menu
     const productInMenu = menu.find((item) => item.title === title);
 
     if (!productInMenu) {
@@ -61,12 +72,25 @@ app.post("/add", async (req, res) => {
     }
 
     if (productInMenu.price !== price) {
-      return res
-        .status(400)
-        .json({ error: "Price does not match the product" });
+      return res.status(400).json({ error: "Price does not match the product" });
     }
 
-    // lägg till produkt i databas
+    // Now you can add the product to the user's entry in the database
+    const userEntry = await dbUsers.findOne({ _id: userId });
+
+    if (!userEntry) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Initialize products array if it doesn't exist
+    if (!userEntry.products) {
+      userEntry.products = [];
+    }
+ 
+    userEntry.products.push({ title, price });
+
+    
+    await dbUsers.update({ _id: userId }, { $set: { products: userEntry.products } });
 
     console.log("Added product:", { title, price });
 
@@ -112,3 +136,5 @@ app.get("/users/:id", async (req, res) => {
     res.status(404).send("Could not find user");
   }
 });
+
+
