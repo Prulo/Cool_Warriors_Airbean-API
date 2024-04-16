@@ -1,6 +1,8 @@
 {"username":"Lisa Lindahl","password":"PengarFOrLife","email":"lisa.hejsan@gmail.com","userId":"2cc48a6c-9dff-4477-ac1d-f92283da2023","_id":"30CKTjgL7cG7mnpK"}
+{"username":"Samuel","password":"GitMixaFri","email":"Samuel@gmail.com","userId":"302f0b12-642b-463f-b42f-f91b62d18008","_id":"6Sg5NBbg35gWzgzO"}
 {"username":"Pige Werkelin","password":"PengarFOrLife","email":"Gemmerapengar.hejsan@gmail.com","userId":"eb70202f-27f0-40ce-bf26-e0ce871e1d33","_id":"6wSMPReo7C4Ery6N"}
 {"username":"Ariel Lindahl Kolberg","password":"123","email":"katten.hejsan@gmail.com","userId":"5d44486f-88d0-4330-9373-334b9da14c88","_id":"D3veOzngSoDduBGa"}
+{"username":"Ant","password":"Isoaho","email":"AtaGigaMind@gmail.com","userId":"743ea5da-3a21-4646-bf18-138ae77d0a7c","_id":"EI3UYx8msiLxF8a1"}
 {"username":"Prulo","password":"Dogass123","email":"Prulo.hejsan@gmail.com","_id":"Evo9251aMLvDXzRR"}
 {"username":"Martin","password":"Hejsan123","email":"martin.hejsan@gmail.com","_id":"EzP672juAwIhSCYj"}
 {"username":"Prulo","password":"Dogass123","email":"Prulo.hejsan@gmail.com","userId":"7ff73bb6-c152-430c-8d31-c4ba6d5288c1","_id":"FwzoHaa1OHx4dDMi"}
@@ -9,10 +11,14 @@
 {"username":"Pigge Werkelin","password":"PengarFOrLife","email":"Geigmerapengar.hejsan@gmail.com","userId":"e305fd1f-9b46-4ad1-9b91-d98da949a18a","_id":"LmLUM4pZLaCxY9GC"}
 {"username":"Ankanjao","password":"Ankis","email":"Ankann@gmail.com","userId":"e9c9b4ae-8fa2-4325-92c4-2ecf4bd23511","_id":"OfOpFgiUQ8IVd2UX"}
 {"username":"Mona Sahlin","password":"SossarnaRockar","email":"Mona.hejsan@gmail.com","_id":"TdDs4MYVm5qGyRNz"}
+{"username":"Nitram","password":"Isoaho","email":"NitraMind@gmail.com","userId":"0d40a7dd-11b7-4153-9480-ed047881849a","_id":"XKLfmlhc6qzDmoQB"}
 {"username":"Prulo","password":"Dogass123","email":"Prulo.hejsan@gmail.com","_id":"Z6HJZ1z0mgO7owaa"}
+{"username":"An","password":"Isoaho","email":"AaGigaMind@gmail.com","userId":"2da9f505-bb98-40fc-bc53-e855aac72c8b","_id":"amTDDW2bAOidSMG5"}
 {"username":"Martin","password":"Hejsan123","email":"martin.hejsan@gmail.com","_id":"bDZw94w6rdvV7Rj5"}
 {"username":"Yngve Karlsson","password":"SossarnaRockar","email":"Mona.hejsan@gmail.com","_id":"bo9gTNDJzNecKngZ"}
+{"username":"Anton","password":"Isoaho","email":"AntaGigaMind@gmail.com","userId":"5e912c86-6b60-4115-966b-40d1f91e497d","_id":"buZA74mDLr2F8HtR"}
 {"username":"bertil Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"eaYoK2AaBHg7dU2p"}
+{"username":"Stefan Löfven","password":"Korvmedbrödärgott","email":"stefan.löfven@regeringskansliet.se","userId":"78909d71-5f0a-403f-a137-bc2afcdc385d","_id":"gQTPtEt7d0j819UP","products":[{"title":"Bryggkaffe","price":39},{"title":"Cortado","price":39},{"title":"Cappuccino","price":49},{"title":"Kaffe Latte","price":54}]}
 {"username":"Berra Karlsson","password":"SossarnaSuger","email":"Mona.hejsan@gmail.com","_id":"iHqrj7x68omAAxSV","products":[{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39},{"title":"Cortado","price":39}]}
 {"username":"Piggan Werkelin","password":"PengarFOrLife","email":"pengar.hejsan@gmail.com","userId":"89249746-674d-4a9e-a124-edb6b1cf273b","_id":"j1Nc6v1PIeaz3ImK"}
 {"username":"Lattjolajban420","password":"11223344","email":"Leet@gmail.com","userId":"0b99ef9a-f03e-4a60-8339-30abdb93bf5f","_id":"kaDVroY4ACxToooO"}
@@ -21,4 +27,5 @@
 {"username":"Hans Kristersson","password":"Dogass123","email":"GitMicaFri.hejsan@gmail.com","userId":"da1ecf28-80f7-49e8-987b-ea12fa1a7936","_id":"p8CQq4dxraf2gIjK"}
 {"username":"Lindahl Kolberg","password":"112233","email":"korven.hejsan@gmail.com","userId":"7f0a8a8b-58c8-4bb7-bcd6-15ca37b9563b","_id":"qOxWqKnkYilx79GI"}
 {"username":"Kolberg","password":"112233","email":"hejsan1@gmail.com","userId":"9cf5e089-bcbc-4d38-b1e3-30a277e7ee7d","_id":"qWbx8bOsKpQn9t3Z"}
+{"username":"Annntttoon","password":"Isoaho","email":"AaaaaGigaMind@gmail.com","userId":"2180de0f-0592-455b-87a8-e9f192abdb63","_id":"s3ror3PPZzRwMgr5","products":[{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39},{"title":"Bryggkaffe","price":39}]}
 {"username":"Prulo","password":"Dogass123","email":"Prulo.hejsan@gmail.com","userId":"ef84205b-2158-48df-b05b-746554f5d247","_id":"sRzgN6wedQYd1kpg"}
