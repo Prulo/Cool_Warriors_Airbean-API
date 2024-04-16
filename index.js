@@ -75,13 +75,11 @@ app.post("/add", async (req, res) => {
     }
     // tittar så priset matchar mot procukten
     if (productInMenu.price !== price) {
-
       return res
         .status(400)
         .json({ error: "Price does not match the product" });
 
       return res.status(400).json({ error: "Price does not match" });
-
     }
     // hittar rätt användare
     const userEntry = await dbUsers.findOne({ _id: userId });
@@ -93,7 +91,6 @@ app.post("/add", async (req, res) => {
       userEntry.products = [];
     }
 
-
     userEntry.products.push({ title, price });
 
     await dbUsers.update(
@@ -103,12 +100,13 @@ app.post("/add", async (req, res) => {
 
     console.log("Added product:", { title, price });
 
-
     // puschar in produkt i rätt användare
     userEntry.products.push({ title, price });
     // uppdaterar använaren
-    await dbUsers.update({ _id: userId }, { $set: { products: userEntry.products } });
-    
+    await dbUsers.update(
+      { _id: userId },
+      { $set: { products: userEntry.products } }
+    );
 
     res.json({ success: true });
   } catch (error) {
@@ -116,17 +114,35 @@ app.post("/add", async (req, res) => {
   }
 });
 
+// När vi skapar, rodda id, uuid,
 app.post("/users/signup", async (req, res) => {
-  const user = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
+  const { username, password, email } = req.body;
 
-    // id: bibliotek eller db-konsruerat?
-  };
+  if (!username || !email) {
+    return res.status(400).send("Username and/or password are required");
+  }
   try {
-    dbUsers.insert(user);
-    res.status(201).json({ message: "User created" });
+    const existingUser = await dbUsers.findOne({
+      $or: [{ username }, { email }],
+    });
+    if (existingUser) {
+      if (existingUser.username === username) {
+        return res.status(400).json({ message: "Username already exists" });
+      } else {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+    }
+
+    const newUser = {
+      username,
+      password,
+      email,
+      userId: uuidv4(),
+    };
+
+    await dbUsers.insert(newUser);
+    res.status(201).json({ message: "User created", userId: newUser.userId });
+    console.log(newUser);
     // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
     res.status(500).send("Internal server error");
@@ -148,20 +164,17 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-
-
-app.get('/users/products/:id', async (req, res) => {
+app.get("/users/products/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await dbUsers.findOne({ _id: userId });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
     const products = user.products || [];
     res.json(products);
   } catch (err) {
-    console.error('Error occurred while querying database:', err);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error occurred while querying database:", err);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
