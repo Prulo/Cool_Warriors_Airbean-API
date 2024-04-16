@@ -1,6 +1,5 @@
 const express = require("express");
 const Datastore = require("nedb-promise");
-const { v4: uuidv4 } = require("uuid");
 
 const { getMenu } = require("./routes/beans");
 
@@ -27,12 +26,19 @@ const dbMenu = new Datastore({
   autoload: true,
 });
 
+/* app.use("/api/user", userRoutes); */
+
 const server = app.listen(PORT, URL, () => {
   console.log(`Listening to port: ${PORT}`);
 });
 
 app.get("/", (req, res) => {
   res.send("Hello there, my friend!");
+});
+
+// Ej färdig, för att posta menyn till databasen
+app.post("/beans", async (req, res) => {
+  const { price, desc, id, title } = req.body;
 });
 
 module.exports = { dbUsers, dbOrders };
@@ -50,13 +56,11 @@ app.get("/beans", async (req, res) => {
 app.post("/add", async (req, res) => {
   try {
     const { title, price, userId } = req.body;
-
-    // Check if userId is provided
+    // ser så att det finns en användare som matchar vad man skickar in
     if (!userId) {
       return res.status(400).json({ error: "User ID is required" });
     }
-
-    // Retrieve menu data
+    // Hämtar menyn för att sendan titta igenom
     const menuData = await getMenu();
     if (!menuData || !menuData.menu) {
       return res.status(500).json({ error: "Failed to retrieve menu data" });
@@ -64,30 +68,31 @@ app.post("/add", async (req, res) => {
 
     const menu = menuData.menu;
 
-    // Find the product in the menu
+    // tittar så att namnet på procukten matchar
     const productInMenu = menu.find((item) => item.title === title);
-
     if (!productInMenu) {
-      return res.status(400).json({ error: "Product not found in the menu" });
+      return res.status(400).json({ error: "Product not found" });
     }
-
+    // tittar så priset matchar mot procukten
     if (productInMenu.price !== price) {
+
       return res
         .status(400)
         .json({ error: "Price does not match the product" });
+
+      return res.status(400).json({ error: "Price does not match" });
+
     }
-
-    // Now you can add the product to the user's entry in the database
+    // hittar rätt användare
     const userEntry = await dbUsers.findOne({ _id: userId });
-
     if (!userEntry) {
       return res.status(400).json({ error: "User not found" });
     }
-
-    // Initialize products array if it doesn't exist
+    // sätter upp så det läggs separat i användar arrayen/databasen
     if (!userEntry.products) {
       userEntry.products = [];
     }
+
 
     userEntry.products.push({ title, price });
 
@@ -98,54 +103,36 @@ app.post("/add", async (req, res) => {
 
     console.log("Added product:", { title, price });
 
+
+    // puschar in produkt i rätt användare
+    userEntry.products.push({ title, price });
+    // uppdaterar använaren
+    await dbUsers.update({ _id: userId }, { $set: { products: userEntry.products } });
+    
+
     res.json({ success: true });
   } catch (error) {
-    console.error("Failed to add product:", error);
     res.status(500).json({ error: "Failed to add product" });
   }
 });
 
-// Get requst for login returnera UUID?
-// Get request för orderhistorik (som gäst eller som användare (uuid))
-
-// När vi skapar, rodda id, uuid,
 app.post("/users/signup", async (req, res) => {
-  const { username, password, email } = req.body;
+  const user = {
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
 
-  if (!username || !email) {
-    return res.status(400).send("Username and/or password are required");
-  }
+    // id: bibliotek eller db-konsruerat?
+  };
   try {
-    const existingUser = await dbUsers.findOne({
-      $or: [{ username }, { email }],
-    });
-    if (existingUser) {
-      if (existingUser.username === username) {
-        return res.status(400).json({ message: "Username already exists" });
-      } else {
-        return res.status(400).json({ message: "Email already exists" });
-      }
-    }
-
-    const newUser = {
-      username,
-      password,
-      email,
-      userId: uuidv4(),
-    };
-
-    await dbUsers.insert(newUser);
-    res.status(201).json({ message: "User created", userId: newUser.userId });
-    console.log(newUser);
+    dbUsers.insert(user);
+    res.status(201).json({ message: "User created" });
     // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
     res.status(500).send("Internal server error");
   }
 });
-
-app.get("/users/login");
-
-// För att hitta användare med specifikt id, anvämnda för att returnera ordrar lagda med ID:t?
+// För att hitta användare med specifikt id
 app.get("/users/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -160,3 +147,21 @@ app.get("/users/:id", async (req, res) => {
     res.status(404).send("Could not find user");
   }
 });
+
+
+
+app.get('/users/products/:id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await dbUsers.findOne({ _id: userId });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const products = user.products || [];
+    res.json(products);
+  } catch (err) {
+    console.error('Error occurred while querying database:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
