@@ -75,7 +75,13 @@ app.post("/add", async (req, res) => {
     }
     // tittar så priset matchar mot procukten
     if (productInMenu.price !== price) {
+
+      return res
+        .status(400)
+        .json({ error: "Price does not match the product" });
+
       return res.status(400).json({ error: "Price does not match" });
+
     }
     // hittar rätt användare
     const userEntry = await dbUsers.findOne({ _id: userId });
@@ -86,11 +92,24 @@ app.post("/add", async (req, res) => {
     if (!userEntry.products) {
       userEntry.products = [];
     }
+
+
+    userEntry.products.push({ title, price });
+
+    await dbUsers.update(
+      { _id: userId },
+      { $set: { products: userEntry.products } }
+    );
+
+    console.log("Added product:", { title, price });
+
+
     // puschar in produkt i rätt användare
     userEntry.products.push({ title, price });
     // uppdaterar använaren
     await dbUsers.update({ _id: userId }, { $set: { products: userEntry.products } });
     
+
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: "Failed to add product" });
@@ -110,7 +129,7 @@ app.post("/users/signup", async (req, res) => {
     res.status(201).json({ message: "User created" });
     // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
-    res.status(400).send("Could not create a user");
+    res.status(500).send("Internal server error");
   }
 });
 // För att hitta användare med specifikt id
@@ -129,6 +148,8 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
+
+
 app.get('/users/products/:id', async (req, res) => {
   const userId = req.params.id;
   try {
@@ -143,5 +164,4 @@ app.get('/users/products/:id', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
 
