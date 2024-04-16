@@ -1,5 +1,6 @@
 const express = require("express");
 const Datastore = require("nedb-promise");
+const { v4: uuidv4 } = require("uuid");
 
 const { getMenu } = require("./routes/beans");
 
@@ -78,8 +79,6 @@ app.post("/add", async (req, res) => {
       return res
         .status(400)
         .json({ error: "Price does not match the product" });
-
-      return res.status(400).json({ error: "Price does not match" });
     }
     // hittar rätt användare
     const userEntry = await dbUsers.findOne({ _id: userId });
@@ -145,9 +144,28 @@ app.post("/users/signup", async (req, res) => {
     console.log(newUser);
     // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
+    console.error(err);
     res.status(500).send("Internal server error");
   }
 });
+
+app.post("/users/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await dbUsers.findOne({ username });
+    if (!user) {
+      return res.status(401).send("Invalid username or password");
+    }
+    if (user.password !== password) {
+      return res.status(401).send("Invalid username or password");
+    }
+    res.json({ message: "Login successfull", success: true });
+  } catch (err) {
+    res.status(500).send("Internal server error");
+  }
+});
+
 // För att hitta användare med specifikt id
 app.get("/users/:id", async (req, res) => {
   const id = req.params.id;
