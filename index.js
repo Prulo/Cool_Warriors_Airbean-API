@@ -37,11 +37,6 @@ app.get("/", (req, res) => {
   res.send("Hello there, my friend!");
 });
 
-// Ej färdig, för att posta menyn till databasen
-app.post("/beans", async (req, res) => {
-  const { price, desc, id, title } = req.body;
-});
-
 module.exports = { dbUsers, dbOrders };
 
 app.get("/beans", async (req, res) => {
@@ -50,15 +45,15 @@ app.get("/beans", async (req, res) => {
     res.json(menu);
   } catch (error) {
     console.error("Failed", error);
-    res.status(500).json({ error: "Failed" });
+    res.status(500).json({ error: "Failed to retrieve menu", success: false });
   }
 });
 
-app.post("/add", async (req, res) => {
+app.post("/beans/add", async (req, res) => {
   try {
-    const { title, price, userId } = req.body;
+    const { title, price, id } = req.body;
     // ser så att det finns en användare som matchar vad man skickar in
-    if (!userId) {
+    if (!id) {
       return res.status(400).json({ error: "User ID is required" });
     }
     // Hämtar menyn för att sendan titta igenom
@@ -72,7 +67,7 @@ app.post("/add", async (req, res) => {
     // tittar så att namnet på procukten matchar
     const productInMenu = menu.find((item) => item.title === title);
     if (!productInMenu) {
-      return res.status(400).json({ error: "Product not found" });
+      return res.status(400).json({ error: "Title of product does not exist" });
     }
     // tittar så priset matchar mot procukten
     if (productInMenu.price !== price) {
@@ -81,7 +76,7 @@ app.post("/add", async (req, res) => {
         .json({ error: "Price does not match the product" });
     }
     // hittar rätt användare
-    const userEntry = await dbUsers.findOne({ _id: userId });
+    const userEntry = await dbUsers.findOne({ _id: id });
     if (!userEntry) {
       return res.status(400).json({ error: "User not found" });
     }
@@ -90,26 +85,22 @@ app.post("/add", async (req, res) => {
       userEntry.products = [];
     }
 
-    userEntry.products.push({ title, price });
-
-    await dbUsers.update(
-      { _id: userId },
-      { $set: { products: userEntry.products } }
-    );
-
     console.log("Added product:", { title, price });
 
     // puschar in produkt i rätt användare
     userEntry.products.push({ title, price });
     // uppdaterar använaren
     await dbUsers.update(
-      { _id: userId },
+      { _id: id },
       { $set: { products: userEntry.products } }
     );
 
-    res.json({ success: true });
+    res.json({
+      success: true,
+      message: `${title} was added to customers cart`,
+    });
   } catch (error) {
-    res.status(500).json({ error: "Failed to add product" });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -166,7 +157,7 @@ app.post("/users/login", async (req, res) => {
   }
 });
 
-// För att hitta användare med specifikt id
+// För att hitta användare med specifikt id, egentligen onödig.
 app.get("/users/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -183,9 +174,9 @@ app.get("/users/:id", async (req, res) => {
 });
 
 app.get("/users/products/:id", async (req, res) => {
-  const userId = req.params.id;
+  const id = req.params.id;
   try {
-    const user = await dbUsers.findOne({ _id: userId });
+    const user = await dbUsers.findOne({ _id: id });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
