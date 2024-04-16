@@ -72,7 +72,9 @@ app.post("/add", async (req, res) => {
     }
 
     if (productInMenu.price !== price) {
-      return res.status(400).json({ error: "Price does not match the product" });
+      return res
+        .status(400)
+        .json({ error: "Price does not match the product" });
     }
 
     // Now you can add the product to the user's entry in the database
@@ -86,11 +88,13 @@ app.post("/add", async (req, res) => {
     if (!userEntry.products) {
       userEntry.products = [];
     }
- 
+
     userEntry.products.push({ title, price });
 
-    
-    await dbUsers.update({ _id: userId }, { $set: { products: userEntry.products } });
+    await dbUsers.update(
+      { _id: userId },
+      { $set: { products: userEntry.products } }
+    );
 
     console.log("Added product:", { title, price });
 
@@ -135,7 +139,7 @@ app.post("/users/signup", async (req, res) => {
     console.log(newUser);
     // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
-    res.status(400).send("Could not create a user");
+    res.status(500).send("Internal server error");
   }
 });
 
@@ -156,5 +160,3 @@ app.get("/users/:id", async (req, res) => {
     res.status(404).send("Could not find user");
   }
 });
-
-
