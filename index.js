@@ -108,8 +108,10 @@ app.post("/beans/add", async (req, res) => {
 app.post("/users/signup", async (req, res) => {
   const { username, password, email } = req.body;
 
-  if (!username || !email) {
-    return res.status(400).send("Username and/or password are required");
+  if (!username || !password || !email) {
+    return res
+      .status(400)
+      .send("Username, password and email are required for signup");
   }
   try {
     const existingUser = await dbUsers.findOne({
@@ -119,7 +121,9 @@ app.post("/users/signup", async (req, res) => {
       if (existingUser.username === username) {
         return res.status(400).json({ message: "Username already exists" });
       } else {
-        return res.status(400).json({ message: "Email already exists" });
+        return res
+          .status(400)
+          .json({ message: "Email is already connected to another account" });
       }
     }
 
@@ -133,7 +137,6 @@ app.post("/users/signup", async (req, res) => {
     await dbUsers.insert(newUser);
     res.status(201).json({ message: "User created", userId: newUser.userId });
     console.log(newUser);
-    // Den kan dessvärre lägga till användare med tomma fält, lägg in ex "user.length > 0"
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal server error");
